@@ -405,7 +405,10 @@
             "type": "CustomObject",
             "class": "CustomObjectParser",
             "description": "Services Custom objects, Article Types, and Custom Medatadata Types",
-            "extension": "object"
+            "extension": "object",
+            "options": {
+                "item_xpath": "./xmlns:label"
+            }
         },
         {
             "type": "BusinessProcess",
