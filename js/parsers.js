@@ -45,7 +45,7 @@ function isMetadataXmlMatch(file, metadata) {
     return isBaseMatch(file, metadata) && isFile(file)
 }
 function isCustomObjectMatch(file, metadata, managed) {
-    return (managed || !isManagedObjectFilter(file)) && isCustomObjectFilter(file) && isFileExtensionMatch(file, metadata)
+    return (managed || !isManagedObjectFilter(file)) && isCustomObjectFilter(file, metadata) && isFileExtensionMatch(file, metadata)
 }
 // ====================================================================================================
 // ======================================      Filter     ===========================================
@@ -56,8 +56,9 @@ function unmanagedElementFilter(element) {
 function isManagedObjectFilter(file) {
     return file.path.match(/__[\s\S]*__/)
 }
-function isCustomObjectFilter(file) {
-    return file.path.match(/__c.object$/) || file.path.match(/__mdt.object$/) || file.path.match(/__kav.object$/) || file.path.match(/__e.object$/) || file.path.match(/__b.object$/)
+function isCustomObjectFilter(file, metadata) {
+    return (file.path.match(/__c.object$/) || file.path.match(/__mdt.object$/) || file.path.match(/__kav.object$/) || 
+        file.path.match(/__e.object$/) || file.path.match(/__b.object$/)) && getXmlElements(file, metadata).length > 0
 }
 function customElementFilter(element, metadata) {
     var customOnlyTypes = ['CustomField']
