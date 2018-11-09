@@ -20,6 +20,9 @@ function isExtensionMatch(file, metadata) {
 function isFile(file, metadata) {
     return file.stats.isFile()
 }
+function isMetadataExtensionMatch(file, metadata) {
+    return file.path.endsWith('-meta.xml')
+}
 
 
 // Composed
@@ -33,7 +36,7 @@ function isSettingsMatch(file, metadata) {
     return isBaseMatch(file, metadata) && isNameMatch(file, metadata)
 }
 function isFolderMatch(file, metadata) {
-    return isDirMatch(file, metadata) && !file.path.endsWith('-meta.xml') && !file.path.endsWith('unfiled$public')
+    return isDirMatch(file, metadata) && !file.path.endsWith('-meta.xml') && !file.path.endsWith('unfiled$public') && fs.existsSync(file.path + '-meta.xml')
 }
 function isFileMatch(file, metadata) {
     return isBaseMatch(file, metadata) && isFile(file)
@@ -42,7 +45,8 @@ function isFileExtensionMatch(file, metadata) {
     return isFileMatch(file, metadata) && isExtensionMatch(file, metadata)
 }
 function isMetadataXmlMatch(file, metadata) {
-    return isBaseMatch(file, metadata) && isFile(file)
+    var match = utils.escape(path.sep + 'src' + path.sep + metadata.dir + path.sep + path.basename(file.path))
+    return isDirMatch(file, metadata) && isMetadataExtensionMatch(file) && file.path.match(new RegExp(match))
 }
 function isCustomObjectMatch(file, metadata, managed) {
     return (managed || !isManagedObjectFilter(file)) && isCustomObjectFilter(file, metadata) && isFileExtensionMatch(file, metadata)
@@ -145,7 +149,7 @@ function BusinessProcessParser(metadata, contents, managed) {
 }
 function CustomLabelsParser(metadata, contents, managed) {
     return contents
-        .filter(file => isMetadataXmlMatch(file, metadata))
+        .filter(file => isFileMatch(file, metadata))
         .map(file => getElement(file, metadata))
         .reduce(merge, [])
 }
@@ -156,12 +160,12 @@ function CustomObjectParser(metadata, contents, managed) {
 }
 function DocumentParser(metadata, contents, managed) {
     return contents
-        .filter(file => (isFileMatch(file, metadata) || isFolderMatch(file, metadata)))
+        .filter(file => (isFileMatch(file, metadata) || isFolderMatch(file, metadata) || isMetadataXmlMatch(file, metadata)))
         .map(file => getFolderAndFilenameWithExt(file, metadata))
 }
 function FolderAndFilenameParser(metadata, contents, managed) {
     return contents
-        .filter(file => (isBaseMatch(file, metadata) || isFolderMatch(file, metadata)))
+        .filter(file => (isBaseMatch(file, metadata) || isFolderMatch(file, metadata) || isMetadataXmlMatch(file, metadata)))
         .map(file => getFolderAndFilename(file, metadata)).sort()
 }
 function MetadataFilenameParser(metadata, contents, managed) {
@@ -176,7 +180,7 @@ function MetadataFolderParser(metadata, contents, managed) {
 }
 function MetadataXmlElementParser(metadata, contents, managed) {
     return contents
-        .filter(file => isMetadataXmlMatch(file, metadata))
+        .filter(file => isFileMatch(file, metadata))
         .map(file => getFileAndElement(file, metadata, managed))
         .reduce(merge, [])
 }
