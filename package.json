@@ -1,6 +1,6 @@
 {
   "name": "package-xml",
-  "version": "2.4.16",
+  "version": "2.4.16-kenhuman",
   "description": "Build a Salesforce Package.xml file from a src directory",
   "main": "index.js",
   "bin": {
