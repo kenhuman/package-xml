@@ -90,6 +90,11 @@ function getAuraName(file, metadata) {
     name = name.substring(name.lastIndexOf(path.sep) + 1)
     return name
 }
+function getLWCName(file, metadata) {
+    var name = file.path.substring(0, file.path.lastIndexOf(path.sep))
+    name = name.substring(name.lastIndexOf(path.sep) + 1)
+    return name
+}
 function getFolderAndFilename(file, metadata) {
     return utils.getFolderAndFilename(file.path, metadata.extension, metadata.dir)
 }
@@ -130,6 +135,11 @@ function AuraBundleParser(metadata, contents, managed) {
     return contents
         .filter(file => isFileMatch(file, metadata))
         .map(file => getAuraName(file, metadata))
+}
+function LWCBundleParser(metadata, contents, managed) {
+    return contents
+        .filter(file => isFileMatch(file, metadata))
+        .map(file => getLWCName(file, metadata))
 }
 function AuthProviderParser(metadata, contents, managed) {
     return contents
@@ -194,6 +204,7 @@ function SettingsParser(metadata, contents, managed) {
 }
 module.exports = {
     AuraBundleParser: AuraBundleParser,
+    LWCBundleParser: LWCBundleParser,
     AuthProviderParser: AuthProviderParser,
     BaseMetadataParser: BaseMetadataParser,
     BusinessProcessParser: BusinessProcessParser,

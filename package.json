@@ -1,6 +1,6 @@
 {
   "name": "package-xml",
-  "version": "2.4.16-kenhuman",
+  "version": "2.4.18",
   "description": "Build a Salesforce Package.xml file from a src directory",
   "main": "index.js",
   "bin": {
@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "fs-extra": "^0.30.0",
-    "libxmljs": "^0.19.5",
+    "libxmljs": "^0.19.0",
     "lodash": "^4.15.0",
     "yargs": "^5.0.0"
   }

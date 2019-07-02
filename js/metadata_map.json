@@ -383,6 +383,15 @@
             "extension": "letter"
         }
     ],
+    "lwc": [
+        {
+            "type": "LightningComponentBundle",
+            "class": "LWCBundleParser",
+            "star": true,
+            "description": "Represents a Lightning web component bundle. A bundle contains an html template, xml configuration file, and optional css stylesheet.",
+            "version": "45"
+        }
+    ],
     "matchingRules": [
         {
             "type": "MatchingRule",
