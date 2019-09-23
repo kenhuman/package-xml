@@ -214,6 +214,16 @@
             "extension": "datasource"
         }
     ],
+    "datacategorygroups": [
+        {
+            "type": "DataCategoryGroup",
+            "class": "MetadataFilenameParser",
+            "star": true,
+            "description": "",
+            "version": "18",
+            "extension": "datacategorygroup"
+        }
+    ],
     "documents": [
         {
             "type": "Document",
