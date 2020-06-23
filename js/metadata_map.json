@@ -266,6 +266,15 @@
             }
         }
     ],
+    "experiences": [
+        {
+            "type": "ExperienceBundle",
+            "class": "ExperienceBundleParser",
+            "star": true,
+            "description": "Represents a Lightning definition bundle. A bundle contains a Lightning definition and all its related resources. The definition can be a component, application, event, interface, or a tokens collection.",
+            "extension": "site"
+        }
+    ],    
     "flexipages": [
         {
             "type": "FlexiPage",
@@ -411,12 +420,48 @@
                 "item_xpath": "./xmlns:matchingRules/xmlns:fullName"
             }
         }
-    ],   
+    ],
+    "moderation": [
+        {
+            "type": "KeywordList",
+            "class": "BaseMetadataParser",
+            "extension": "keywords"
+        }, 
+        {
+            "type": "ModerationRule",
+            "class": "BaseMetadataParser",
+            "extension": "rule"
+        }
+    ],
     "namedCredentials": [
         {
             "type": "NamedCredential",
             "class": "MetadataFilenameParser",
             "extension": "namedCredential"
+        }
+    ],
+    "navigationMenus": [
+        {
+            "type": "NavigationMenu",
+            "class": "BaseMetadataParser",
+            "star": true,
+            "extension": "navigationMenu"
+        }
+    ],
+    "networkBranding": [
+        {
+            "type": "NetworkBranding",
+            "class": "MetadataFilenameParser",
+            "star": true,
+            "extension": "networkBranding"
+        }
+    ],
+    "networks": [
+        {
+            "type": "Network",
+            "class": "BaseMetadataParser",
+            "star": true,
+            "extension": "network"
         }
     ],
     "objects": [
@@ -829,6 +874,13 @@
             }
         }
     ],
+    "sites": [
+        {
+            "type": "CustomSite",
+            "class": "BaseMetadataParser",
+            "extension": "site"
+        }
+    ],
     "staticresources": [
         {
             "type": "StaticResource",
@@ -872,6 +924,13 @@
             "type": "ApexTrigger",
             "class": "MetadataFilenameParser",
             "extension": "trigger"
+        }
+    ],
+    "userCriteria": [
+        {
+            "type": "UserCriteria",
+            "class": "MetadataFilenameParser",
+            "extension": "userCriteria"
         }
     ],
     "weblinks": [

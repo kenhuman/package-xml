@@ -141,6 +141,11 @@ function LWCBundleParser(metadata, contents, managed) {
         .filter(file => isFileMatch(file, metadata))
         .map(file => getLWCName(file, metadata))
 }
+function ExperienceBundleParser(metadata, contents, managed) {
+    return contents
+        .filter(file => isMetadataXmlMatch(file, metadata))
+        .map(file => getFilename(file, metadata))
+}
 function AuthProviderParser(metadata, contents, managed) {
     return contents
         .filter(file => isAuthProviderMatch(file, metadata))
@@ -205,6 +210,7 @@ function SettingsParser(metadata, contents, managed) {
 module.exports = {
     AuraBundleParser: AuraBundleParser,
     LWCBundleParser: LWCBundleParser,
+    ExperienceBundleParser: ExperienceBundleParser,
     AuthProviderParser: AuthProviderParser,
     BaseMetadataParser: BaseMetadataParser,
     BusinessProcessParser: BusinessProcessParser,
